@@ -38,8 +38,32 @@ mod tests {
     }
 }
 
+use std::io;
+use std::io::Write;
 
 fn main() {
     const TAX_PERCENTAGE: f64 = 5.5; // 5.5%
-    println!("Hello, world!");
+    let mut subtotal: f64 = 0.0;
+    for i in 1..4 {
+        print!("Enter the price of item {}: ", i);
+        let mut price = String::new();
+        io::stdout().flush().unwrap();
+        io::stdin().read_line(&mut price).expect("Failed to read input");
+        let price: f64 = price.trim().parse().expect("Please enter a valid number");
+
+        print!("Enter the quantity of item {}: ", i);
+        let mut qty = String::new();
+        io::stdout().flush().unwrap();
+        io::stdin().read_line(&mut qty).expect("Failed to read input");
+        let qty: f64 = qty.trim().parse().expect("Please enter a valid number");
+
+        subtotal += price * qty;
+    }
+
+    let tax: f64 = calculate_tax(subtotal, TAX_PERCENTAGE);
+    let total: f64 = subtotal + tax;
+
+    println!("Subtotal: ${}", subtotal);
+    println!("Tax: ${}", tax);
+    println!("Total: ${}", total);
 }
