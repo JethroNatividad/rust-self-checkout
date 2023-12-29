@@ -16,7 +16,7 @@ fn round_decimal(number: f64) -> f64 {
 
 fn calculate_tax(subtotal: f64) -> f64 {
     const TAX_RATE: f64 = 0.055; // 5.5%
-    subtotal * TAX_RATE
+    round_decimal(subtotal * TAX_RATE)
 }
 
 #[cfg(test)]
