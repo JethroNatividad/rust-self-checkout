@@ -14,9 +14,8 @@ fn round_decimal(number: f64) -> f64 {
     (number * 1000.0).round() / 1000.0
 }
 
-fn calculate_tax(subtotal: f64) -> f64 {
-    const TAX_RATE: f64 = 0.055; // 5.5%
-    round_decimal(subtotal * TAX_RATE)
+fn calculate_tax(subtotal: f64, tax_rate: f64) -> f64 {
+    round_decimal(subtotal * tax_rate)
 }
 
 #[cfg(test)]
@@ -32,14 +31,15 @@ mod tests {
 
     #[test]
     fn test_calculate_tax(){
-        assert_eq!(calculate_tax(64.0), 3.52);
-        assert_eq!(calculate_tax(55.0), 3.025);
-        assert_eq!(calculate_tax(120.0), 6.6);
-        assert_eq!(calculate_tax(89.0), 4.895);
+        assert_eq!(calculate_tax(64.0, 0.055), 3.52);
+        assert_eq!(calculate_tax(55.0, 0.055), 3.025);
+        assert_eq!(calculate_tax(120.0, 0.055), 6.6);
+        assert_eq!(calculate_tax(89.0, 0.055), 4.895);
     }
 }
 
 
 fn main() {
+    const TAX_RATE: f64 = 0.055; // 5.5%
     println!("Hello, world!");
 }
