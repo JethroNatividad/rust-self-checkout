@@ -60,17 +60,8 @@ fn main() {
     const TAX_PERCENTAGE: f64 = 5.5; // 5.5%
     let mut subtotal: f64 = 0.0;
     for i in 1..4 {
-        print!("Enter the price of item {}: ", i);
-        let mut price = String::new();
-        io::stdout().flush().unwrap();
-        io::stdin().read_line(&mut price).expect("Failed to read input");
-        let price: f64 = price.trim().parse().expect("Please enter a valid number");
-
-        print!("Enter the quantity of item {}: ", i);
-        let mut qty = String::new();
-        io::stdout().flush().unwrap();
-        io::stdin().read_line(&mut qty).expect("Failed to read input");
-        let qty: f64 = qty.trim().parse().expect("Please enter a valid number");
+        let price: f64 = get_input(&format!("Enter the price of item {}: ", i));
+        let qty: f64 = get_input(&format!("Enter the quantity of item {}: ", i));
 
         subtotal += price * qty;
     }
